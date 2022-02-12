@@ -24,6 +24,7 @@ class SearchForm extends Component {
             this.props.history.push(path);
             e.currentTarget.reset();
     }
+    //** I think I am getting stuck here*/
     componentDidUpdate(prevProps) {
         if(prevProps.location.pathname !== this.props.location.pathname) {
             if(this.props.location.pathname.includes("/search")){ 
