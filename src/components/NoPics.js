@@ -1,10 +1,10 @@
 import React from 'react';
 
-const NoPics = props => (
-  <li className='not-found'>
+const NoPics = () => (
+  <div className='not-found'>
     <i className="material-icons icon-gif">sentiment_very_dissatisfied</i>
     <h3>Sorry, no pictures match your search.</h3>
-  </li>
+  </div>
 );
 
 export default NoPics;

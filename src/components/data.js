@@ -30,5 +30,5 @@ axios(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key
 .catch(error => {
     console.log(error)
 })
-//** Send the results to App.js */
+//** Sends the results to App.js */
 export {dogs, cats, birds}

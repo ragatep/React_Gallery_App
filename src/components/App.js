@@ -17,13 +17,14 @@ import {dogs, cats, birds} from './data.js'
 
 export default class App extends Component {
 
-  state = {
-    randomPics: [],
-    loading: true,
-  }
+    state = {
+      randomPics: [],
+      loading: true,
+    };
 
   componentDidMount(){
     this.performSearch();
+    console.log(this.props);
   }
 
   performSearch = (query = 'pets') =>{
