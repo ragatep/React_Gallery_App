@@ -9,7 +9,8 @@ App.js - App Component
 import React, { Component } from 'react';
 import axios from 'axios';
 import { 
-  HashRouter as Router, 
+  //HashRouter as Router, 
+  BrowserRouter as Router,
   Switch, 
   Route,
 } from 'react-router-dom';
