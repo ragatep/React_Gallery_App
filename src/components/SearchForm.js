@@ -13,7 +13,7 @@ class SearchForm extends Component {
   
     state = {
         // Initializes the default state with values from the search textbox
-            searchText: ''
+        searchText: ''
     }
     // Updates the searchText state
     onSearchChange = (e) => {
@@ -34,7 +34,7 @@ class SearchForm extends Component {
         e.currentTarget.reset();
     }
     /**
-     * Compares previous URL to current url
+     * Compares previous url to current url
      * If the current url has /search then use it as a search value when the webpage loads
      * The search results will look like they persist when the back & forward buttons are used
      */
