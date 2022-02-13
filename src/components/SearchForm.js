@@ -1,13 +1,20 @@
+/*****************************
+Treehouse FSJS Techdegree:
+Project 7 - React Gallery App
+Student: Ryan Agatep
+SearchForm.js - Search Component
+*****************************/
+
+// Imports Libraries
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
-
 
 class SearchForm extends Component {
   
     state = {
         // Initializes the default state with values from the search textbox
             searchText: ''
-        }
+    }
     // Updates the searchText state
     onSearchChange = (e) => {
         this.setState({ searchText: e.target.value });
@@ -19,27 +26,14 @@ class SearchForm extends Component {
          * Invokes the onSearch function that fetches the data
          * Then passes the state back to performSearch(query) from the ref
          */
-            let userQuery = this.query.value;
-            let path = `/search/${userQuery}`;
-            this.props.onSearch(userQuery);
-            this.props.history.push(path);
-            console.log(path);
-            e.currentTarget.reset();
+        let userQuery = this.query.value;
+        let path = `/search/${userQuery}`;
+        this.props.onSearch(userQuery);
+        this.props.history.push(path);
+        // console.log(path);
+        e.currentTarget.reset();
     }
-    //** Troubleshooting this section of code*/
-    componentDidUpdate(prevProps) {
-        if(prevProps.location.pathname !== this.props.location.pathname) {
-            if(this.props.location.pathname.includes("/search")){ 
-                const query = this.props.location.pathname.replace("/search/", "");
-                this.props.onSearch(query);
-                console.log(prevProps.location.pathname)
-                console.log(this.props.location.pathname)
-            } 
-        } else 
-            {console.log(prevProps.location.pathname) 
-                console.log(this.props.location.pathname)}
-    }
-
+    // Render Method
     render() {  
         return (
             // Calls the handleSubmit function

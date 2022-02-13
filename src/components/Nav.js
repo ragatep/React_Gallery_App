@@ -1,7 +1,15 @@
+/****************************
+Treehouse FSJS Techdegree:
+Project 7 - React Gallery App
+Student: Ryan Agatep
+Nav.js - Navigation Component
+****************************/
+
+// Imports Libraries
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 
-const Nav = (props) => {
+const Nav = () => {
     return(
         <nav className="main-nav">
         <ul>

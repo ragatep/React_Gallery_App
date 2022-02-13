@@ -1,3 +1,11 @@
+/*************************************
+Treehouse FSJS Techdegree:
+Project 7 - React Gallery App
+Student: Ryan Agatep
+NoPics.js - No results found Component
+**************************************/
+
+// Imports Libraries
 import React from 'react';
 
 const NoPics = () => (

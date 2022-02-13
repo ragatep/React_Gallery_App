@@ -1,3 +1,10 @@
+/****************************
+Treehouse FSJS Techdegree:
+Project 7 - React Gallery App
+Student: Ryan Agatep
+App.js - App Component
+****************************/
+
 // Imports Libraries
 import React, { Component } from 'react';
 import axios from 'axios';
@@ -13,21 +20,43 @@ import Nav from './Nav'
 import Loading from './Loading';
 import SearchForm from './SearchForm';
 import NotFound from './NotFound';
-import {dogs, cats, birds} from './data.js'
 
 export default class App extends Component {
-
-    state = {
-      randomPics: [],
-      loading: true,
-    };
-
-  componentDidMount(){
-    this.performSearch();
-    console.log(this.props);
+  // Variables' state when the page is loaded
+  state = {
+    randomPics: [],
+    animalsPics: [],
+    dogPics: [],
+    catPics: [],
+    birdPics: [],
+    loading: true,
   }
+  // After all the elements of the page is rendered correctly, this method is called
+  componentDidMount(){
+    /**
+     * From https://masteringjs.io/tutorials/axios/all
+     * Gets all endpoints when the page loads
+     * And updates state to the results
+     */
+    const reqPets = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=animals&per_page=24&format=json&nojsoncallback=1`);
+    const reqDogs = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`);
+    const reqCats = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`);
+    const reqBirds = axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=birds&per_page=24&format=json&nojsoncallback=1`);
 
-  performSearch = (query = 'pets') =>{
+    axios.all([reqPets, reqDogs, reqCats, reqBirds])
+      .then(axios.spread((...responses) => {
+        this.setState({animalsPics: responses[0].data.photos.photo, loading: false});
+        this.setState({dogPics: responses[1].data.photos.photo, loading: false});
+        this.setState({catPics: responses[2].data.photos.photo, loading: false});
+        this.setState({birdPics: responses[3].data.photos.photo, loading: false});
+        }))
+      .catch(error => {
+        console.log('Error fetching and parsing data', error)
+    })
+  }
+  // Search Method
+  performSearch = (query) =>{
+    this.setState({loading: true});
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => 
         this.setState({
@@ -40,7 +69,7 @@ export default class App extends Component {
         console.log('Error fetching and parsing data', error)
       })
     }
-
+  // Render Method
   render() {
     return(
       <Router>
@@ -52,11 +81,12 @@ export default class App extends Component {
           ? <Loading />
           :
           <Switch>
-            <Route exact path="/" render={() =><PhotoContainer data={this.state.randomPics}/>}/>
+            <Route exact path="/" render={() =><PhotoContainer data={this.state.animalsPics}/>}/>
+            {/* {URL Parameter} */}
             <Route exact path="/search/:query" render={() =><PhotoContainer data={this.state.randomPics}/>}/>
-            <Route path="/dogs" render={() =><PhotoContainer data={dogs}/>}/>
-            <Route path="/cats" render={() =><PhotoContainer data={cats}/>}/>
-            <Route path="/birds" render={() =><PhotoContainer data={birds}/>}/>
+            <Route path="/dogs" render={() =><PhotoContainer data={this.state.dogPics}/>}/>
+            <Route path="/cats" render={() =><PhotoContainer data={this.state.catPics}/>}/>
+            <Route path="/birds" render={() =><PhotoContainer data={this.state.birdPics}/>}/>
             <Route component={NotFound}/>
           </Switch>
         }

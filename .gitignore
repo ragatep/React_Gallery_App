@@ -22,4 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# exclude API key from being published online. :)
 /src/components/config.js

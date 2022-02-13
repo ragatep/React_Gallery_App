@@ -1,3 +1,11 @@
+/*****************************
+Treehouse FSJS Techdegree:
+Project 7 - React Gallery App
+Student: Ryan Agatep
+NotFound.js - 404 Component
+*****************************/
+
+// Imports Libraries
 import React from 'react';
 
 const NotFound = () => {
