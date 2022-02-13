@@ -33,6 +33,21 @@ class SearchForm extends Component {
         // console.log(path);
         e.currentTarget.reset();
     }
+    /**
+     * Compares previous URL to current url
+     * If the current url has /search then use it as a search value when the webpage loads
+     * The search results will look like they persist when the back & forward buttons are used
+     */
+    componentDidUpdate(prevProps) {
+        if(prevProps.location.pathname !== this.props.location.pathname) {
+            if(this.props.location.pathname.includes("/search")){ 
+                const query = this.props.location.pathname.replace("/search/", "");
+                this.props.onSearch(query);
+                console.log(prevProps.location.pathname)
+                console.log(this.props.location.pathname)
+            } 
+        }
+    }
     // Render Method
     render() {  
         return (
